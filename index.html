@@ -13,6 +13,11 @@
   .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 80px 24px; text-align: center; }
   .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 10px; }
   .hero p { font-size: 18px; opacity: .85; max-width: 560px; margin: 0 auto; }
+  .hero-btns { margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero-btn { padding: 10px 28px; font-size: 15px; font-weight: 600; border-radius: 8px; text-decoration: none; }
+  .hero-btn.primary { background: #fff; color: #0f3460; }
+  .hero-btn.secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+  .hero-btn:hover { opacity: .9; }
   .section { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
   .section h2 { font-size: 26px; margin-bottom: 16px; }
   .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -22,10 +27,8 @@
   footer { text-align: center; padding: 40px 24px 60px; font-size: 13px; color: #999; }
   footer a { color: #666; text-decoration: none; margin: 0 8px; }
   footer a:hover { color: #333; }
-  .lang { display: none; }
-  .lang.visible { display: block; }
-  .lang.visible .feature { display: block; }
-  .lang.visible .features { display: grid; }</style>
+  .lang { display: none; } .lang.visible { display: block; }
+</style>
 <script>
   function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
   var L = localStorage.getItem('lang') || detectLang();
@@ -44,6 +47,10 @@
   <h1>EdgeTalk</h1>
   <p class="lang lang-zh">以声为笔，无需键盘。让不便于打字的人，也能自由表达。按住右 Cmd 说话，松手即输入。</p>
   <p class="lang lang-en">Your voice is your keyboard. Built for people who can't easily type. Hold right Cmd, speak, release — words appear at your cursor.</p>
+  <div class="hero-btns">
+    <a href="/download" class="hero-btn primary"><span class="lang lang-zh">下载 Mac 版</span><span class="lang lang-en">Download for Mac</span></a>
+    <a href="/buy" class="hero-btn secondary"><span class="lang lang-zh">购买 License</span><span class="lang lang-en">Buy License</span></a>
+  </div>
 </section>
 
 <section class="section">
@@ -94,12 +101,13 @@
   <h2 class="lang lang-en">Requirements</h2>
   <p class="lang lang-zh">macOS 14.0 或更高版本，需配备 Apple Silicon (M1/M2/M3/M4)。</p>
   <p class="lang lang-en">macOS 14.0 or later. Requires Apple Silicon (M1/M2/M3/M4).</p>
-  <p style="margin-top:16px; font-size:14px; color:#888;" class="lang lang-zh">现已在 App Store 上架。</p>
-  <p style="margin-top:16px; font-size:14px; color:#888;" class="lang lang-en">Available on the App Store.</p>
+  <p style="margin-top:16px; font-size:14px; color:#888;" class="lang lang-zh">App Store 也可下载。含 14 天免费试用。</p>
+  <p style="margin-top:16px; font-size:14px; color:#888;" class="lang lang-en">Also on the App Store. 14-day free trial included.</p>
 </section>
 
 <footer>
   <div>
+    <a href="/download"><span class="lang lang-zh">下载</span><span class="lang lang-en">Download</span></a>
     <a href="/privacy"><span class="lang lang-zh">隐私政策</span><span class="lang lang-en">Privacy</span></a>
     <a href="/support"><span class="lang lang-zh">技术支持</span><span class="lang lang-en">Support</span></a>
     <a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a>
