@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy EdgeTalk License</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.6; }
+  .topbar { display: flex; justify-content: flex-end; padding: 12px 20px; gap: 8px; }
+  .lang-btn { font-size: 13px; color: #666; background: none; border: 1px solid #ccc; padding: 2px 10px; border-radius: 4px; cursor: pointer; }
+  .lang-btn.active { color: #333; border-color: #333; font-weight: 600; }
+  .lang { display: none; } .lang.visible { display: block; }
+  .container { max-width: 600px; margin: 0 auto; padding: 40px 24px 60px; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { font-size: 15px; color: #666; margin-bottom: 32px; }
+  .plan { background: #fff; border: 2px solid #0f3460; border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+  .plan h2 { font-size: 20px; margin-bottom: 4px; }
+  .plan .price { font-size: 36px; font-weight: 700; color: #0f3460; margin: 12px 0 4px; }
+  .plan .price small { font-size: 16px; font-weight: 400; color: #999; }
+  .plan .features { font-size: 14px; color: #555; margin: 12px 0; padding-left: 20px; }
+  .plan .features li { margin-bottom: 4px; }
+  .email-field { margin: 20px 0; }
+  .email-field label { display: block; font-size: 14px; color: #555; margin-bottom: 6px; }
+  .email-field input { width: 100%; padding: 10px 14px; font-size: 15px; border: 1px solid #ccc; border-radius: 8px; }
+  .buy-btn { display: block; width: 100%; padding: 14px; font-size: 17px; font-weight: 600; color: #fff; background: #0f3460; border: none; border-radius: 10px; cursor: pointer; margin-top: 16px; }
+  .buy-btn:hover { background: #1a4a80; } .buy-btn:disabled { background: #999; cursor: not-allowed; }
+  .error { color: #d00; font-size: 13px; margin-top: 8px; }
+  #qrcode img { width: 240px; height: 240px; margin: 16px auto; display: block; }
+  #result { text-align: center; margin-top: 20px; display: none; }
+  #result .key { font-size: 28px; font-family: monospace; font-weight: 700; background: #f0f4ff; padding: 12px 20px; border-radius: 8px; letter-spacing: 2px; display: inline-block; margin: 12px 0; }
+  .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid #e5e5e5; border-top-color: #0f3460; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+<script>
+  function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
+  var L = localStorage.getItem('lang') || detectLang();
+  function switchLang(l) { L = l; document.querySelectorAll('.lang').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el => el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l)); localStorage.setItem('lang', l); }
+  document.addEventListener('DOMContentLoaded', () => { switchLang(L); });
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
+  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">English</button>
+</div>
+
+<div class="container">
+  <h1>EdgeTalk License</h1>
+  <p class="subtitle lang lang-zh">一次买断，终身使用。可在最多 3 台 Mac 上激活。14 天免费试用。</p>
+  <p class="subtitle lang lang-en">One-time purchase. Lifetime updates. Use on up to 3 Macs.</p>
+
+  <div class="plan">
+    <h2 class="lang lang-zh">个人版</h2><h2 class="lang lang-en">Personal License</h2>
+    <div class="price"><span class="lang lang-zh">&yen;39</span><span class="lang lang-en">$9.99</span> <small class="lang lang-zh">一次买断</small><small class="lang lang-en">one-time</small></div>
+    <ul class="features lang lang-zh"><li>全部功能解锁</li><li>最多 3 台 Mac 使用</li><li>支持 1.7B 增强模型</li><li>免费更新</li><li>包含 14 天免费试用</li></ul>
+    <ul class="features lang lang-en"><li>All features unlocked</li><li>Use on up to 3 Macs</li><li>1.7B Enhanced model support</li><li>Free updates</li><li>14-day free trial included</li></ul>
+  </div>
+
+  <div class="email-field">
+    <label class="lang lang-zh" for="email">邮箱地址（接收 License Key）</label>
+    <label class="lang lang-en" for="email">Email (receives your license key)</label>
+    <input type="email" id="email" placeholder="you@example.com" required>
+  </div>
+
+  <button class="buy-btn lang lang-zh" id="paybtn" onclick="startPayment()">购买 — &yen;39</button>
+  <button class="buy-btn lang lang-en" id="paybtn-en" onclick="startPayment()">Buy Now — $9.99</button>
+
+  <div id="qrcode"></div>
+  <div id="result"><p class="lang lang-zh" style="color:#333">你的 License Key：</p><p class="lang lang-en" style="color:#333">Your License Key:</p><div class="key" id="license-key"></div><p class="lang lang-zh" style="color:#666; font-size:13px; margin-top:8px;">已复制到剪贴板。在 App 中输入即可激活。</p><p class="lang lang-en" style="color:#666; font-size:13px; margin-top:8px;">Copied to clipboard. Enter it in the app to activate.</p></div>
+  <div id="error" class="error"></div>
+</div>
+
+<script>
+const API = "https://edgetalk.cc/api";
+async function startPayment() {
+  const email = document.getElementById("email").value.trim();
+  if (!email) { document.getElementById("error").textContent = L==='zh' ? "请输入邮箱地址" : "Please enter your email address."; return; }
+  const btn = document.querySelector(".buy-btn.visible") || document.getElementById("paybtn");
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + (L==='zh' ? '处理中…' : 'Processing...');
+  document.getElementById("error").textContent = "";
+  try {
+    const resp = await fetch(API+"/create-order", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email}) });
+    const data = await resp.json();
+    if (data.provider === "payjs") { btn.style.display = "none"; document.getElementById("qrcode").innerHTML = '<img src="'+data.qrcode+'" alt="">'; pollPayment(data.orderId); }
+    else if (data.provider === "lemonsqueezy") { window.location.href = data.url; }
+  } catch(e) { document.getElementById("error").textContent = L==='zh' ? "支付请求失败，请重试。" : "Payment failed. Please try again."; btn.disabled = false; btn.textContent = L==='zh' ? "购买 — ¥39" : "Buy Now — $9.99"; }
+}
+async function pollPayment(oid) { for (let i=0;i<60;i++) { await new Promise(r=>setTimeout(r,3000)); try { const r=await fetch(API+"/order-status?order="+oid); const d=await r.json(); if (d.status==="paid" && d.license_key) { document.getElementById("result").style.display="block"; document.getElementById("license-key").textContent=d.license_key; navigator.clipboard.writeText(d.license_key); return; } } catch(e){} } document.getElementById("error").textContent = L==='zh' ? "支付确认超时，请检查邮箱。" : "Timed out. Check your email for the license key."; }
+</script>
+</body>
+</html>

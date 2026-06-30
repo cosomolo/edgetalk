@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Privacy Policy — EdgeTalk</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.8; }
+  .topbar { display: flex; justify-content: flex-end; padding: 12px 20px; gap: 8px; }
+  .lang-btn { font-size: 13px; color: #666; background: none; border: 1px solid #ccc; padding: 2px 10px; border-radius: 4px; cursor: pointer; }
+  .lang-btn.active { color: #333; border-color: #333; font-weight: 600; }
+  .lang { display: none; } .lang.visible { display: block; }
+  .lang.visible.li { display: list-item; }
+  .container { max-width: 700px; margin: 0 auto; padding: 20px 24px 60px; }
+  h1 { font-size: 28px; margin-bottom: 6px; }
+  .updated { font-size: 13px; color: #999; margin-bottom: 32px; }
+  h2 { font-size: 18px; margin: 28px 0 10px; }
+  p { font-size: 15px; color: #333; margin-bottom: 6px; }
+  ul { padding-left: 20px; } li { font-size: 15px; color: #333; margin-bottom: 6px; }
+  a { color: #0f3460; }
+</style>
+<script>
+  function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
+  var L = localStorage.getItem('lang') || detectLang();
+  function switchLang(l) { L = l; document.querySelectorAll('.lang').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el => el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l)); localStorage.setItem('lang', l); }
+  document.addEventListener('DOMContentLoaded', () => { switchLang(L); });
+</script>
+</head>
+<body>
+<div class="topbar">
+  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
+  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">English</button>
+</div>
+<div class="container">
+  <h1 class="lang lang-zh">隐私政策</h1><h1 class="lang lang-en">Privacy Policy</h1>
+  <p class="updated"><span class="lang lang-zh">最后更新：2026年6月12日</span><span class="lang lang-en">Last updated: June 12, 2026</span></p>
+  <p class="lang lang-zh">EdgeTalk 是一款完全离线运行的 macOS 语音输入应用。我们重视你的隐私。本政策旨在清楚地说明：<strong>我们不收集任何数据。</strong></p>
+  <p class="lang lang-en">EdgeTalk is a completely offline speech-to-text application for macOS. We value your privacy. This policy clearly states: <strong>we collect no data whatsoever.</strong></p>
+
+  <h2 class="lang lang-zh">我们收集什么数据</h2><h2 class="lang lang-en">What Data We Collect</h2>
+  <p class="lang lang-zh">我们不收集任何数据。具体来说：</p><p class="lang lang-en">We do not collect any data. Specifically:</p>
+  <ul>
+    <li class="lang lang-zh"><strong>音频数据</strong> — 所有麦克风音频仅在本地设备上处理。音频数据从不离开你的设备，从不发送到任何服务器，从不以任何形式存储或传输。</li>
+    <li class="lang lang-en"><strong>Audio Data</strong> — All microphone audio is processed solely on your local device. Audio never leaves your device, is never sent to any server, and is never stored in any form.</li>
+    <li class="lang lang-zh"><strong>转录文本</strong> — 语音识别结果仅在本地设备上生成和使用。文本被注入到当前焦点输入框后即被丢弃，不保存、不上传、不分析。</li>
+    <li class="lang lang-en"><strong>Transcription Text</strong> — Results are generated and used only on your local device. Text is discarded after being injected into the active text field.</li>
+    <li class="lang lang-zh"><strong>设备信息</strong> — 不收集设备型号、系统版本、IP 地址或任何其他设备标识信息。</li>
+    <li class="lang lang-en"><strong>Device Information</strong> — No device model, OS version, IP address, or any other device identifiers are collected.</li>
+    <li class="lang lang-zh"><strong>使用数据</strong> — 不追踪你的使用行为、使用时长、功能使用频率。</li>
+    <li class="lang lang-en"><strong>Usage Data</strong> — We do not track your usage patterns, session duration, or feature frequency.</li>
+    <li class="lang lang-zh"><strong>个人信息</strong> — 不要求创建账号、不要求提供邮箱、不要求任何形式的个人信息。</li>
+    <li class="lang lang-en"><strong>Personal Information</strong> — No account creation required, no email requested, no personal information of any kind.</li>
+  </ul>
+
+  <h2 class="lang lang-zh">数据处理位置</h2><h2 class="lang lang-en">Data Processing Location</h2>
+  <p class="lang lang-zh">所有语音识别、文本校正和文字注入均在你的 Mac 本地完成。AI 模型存储在本地文件系统中，不需要网络连接即可运行。</p>
+  <p class="lang lang-en">All speech recognition, text correction, and text injection run on your Mac. AI models are stored locally and operate without any internet connection.</p>
+
+  <h2 class="lang lang-zh">第三方服务</h2><h2 class="lang lang-en">Third-Party Services</h2>
+  <p class="lang lang-zh">本应用不使用任何第三方分析工具、广告 SDK 或数据共享服务。</p>
+  <p class="lang lang-en">This application uses no third-party analytics tools, advertising SDKs, or data-sharing services.</p>
+
+  <h2 class="lang lang-zh">权限说明</h2><h2 class="lang lang-en">Required Permissions</h2>
+  <ul>
+    <li class="lang lang-zh"><strong>麦克风</strong> — 用于采集音频进行语音识别。音频数据不离开本机。</li>
+    <li class="lang lang-en"><strong>Microphone</strong> — For capturing audio. Audio data never leaves your device.</li>
+    <li class="lang lang-zh"><strong>辅助功能</strong> — EdgeTalk 以无障碍为设计核心。该权限让不便于使用键盘的用户通过说话打字：按住右 Cmd 说话，松手自动粘贴到光标位置。不会读取、收集或访问任何其他应用的内容或用户数据。</li>
+    <li class="lang lang-en"><strong>Accessibility</strong> — EdgeTalk is built for accessibility. This permission enables people who cannot easily use a keyboard to type with their voice: hold right Cmd to speak, release to paste at the cursor. Does not read, collect, or access content from any other application.</li>
+  </ul>
+
+  <h2 class="lang lang-zh">联系我们</h2><h2 class="lang lang-en">Contact Us</h2>
+  <p class="lang lang-zh">如有疑问：</p><p class="lang lang-en">If you have any questions:</p>
+  <p>GitHub Issues: <a href="https://github.com/cosomolo/edgetalk/issues">github.com/cosomolo/edgetalk/issues</a></p>
+  <p><span class="lang lang-zh">邮箱：</span><span class="lang lang-en">Email: </span><a href="mailto:fengxiq@gmail.com">fengxiq@gmail.com</a></p>
+</div>
+</body>
+</html>

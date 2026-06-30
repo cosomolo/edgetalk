@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Download EdgeTalk</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.6; }
+  .topbar { display: flex; justify-content: flex-end; padding: 12px 20px; gap: 8px; }
+  .lang-btn { font-size: 13px; color: #666; background: none; border: 1px solid #ccc; padding: 2px 10px; border-radius: 4px; cursor: pointer; }
+  .lang-btn.active { color: #333; border-color: #333; font-weight: 600; }
+  .lang { display: none; } .lang.visible { display: block; }
+  .container { max-width: 600px; margin: 0 auto; padding: 40px 24px 60px; text-align: center; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { font-size: 15px; color: #666; margin-bottom: 32px; }
+  .download-btn { display: inline-block; padding: 16px 48px; font-size: 18px; font-weight: 600; color: #fff; background: #0f3460; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; }
+  .download-btn:hover { background: #1a4a80; }
+  .info { background: #fff; border-radius: 12px; padding: 24px; margin-top: 32px; text-align: left; }
+  .info h2 { font-size: 18px; margin-bottom: 12px; }
+  .info p,.info li { font-size: 14px; color: #555; margin-bottom: 6px; }
+  .info ol,.info ul { padding-left: 20px; }
+  .trial { margin-top: 24px; font-size: 14px; color: #888; }
+</style>
+<script>
+  function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
+  var L = localStorage.getItem('lang') || detectLang();
+  function switchLang(l) { L = l; document.querySelectorAll('.lang').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el => el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l)); localStorage.setItem('lang', l); }
+  document.addEventListener('DOMContentLoaded', () => { switchLang(L); });
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
+  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">English</button>
+</div>
+
+<div class="container">
+  <h1 class="lang lang-zh">EdgeTalk for macOS</h1>
+  <h1 class="lang lang-en">EdgeTalk for macOS</h1>
+  <p class="subtitle lang lang-zh">以声为笔，无需键盘。为所有用户设计——尤其是有打字障碍的用户。</p>
+  <p class="subtitle lang lang-en">Voice typing, zero privacy trade-offs. Built for everyone — including those who can't easily type.</p>
+
+  <a class="download-btn" href="https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg">
+    <span class="lang lang-zh">下载 Mac 版（Apple Silicon）</span>
+    <span class="lang lang-en">Download for Mac (Apple Silicon)</span>
+  </a>
+
+  <p class="trial"><span class="lang lang-zh">含 14 天免费试用。</span><span class="lang lang-en">Includes 14-day free trial.</span> <a href="/buy"><span class="lang lang-zh">购买 License →</span><span class="lang lang-en">Buy a license →</span></a></p>
+
+  <div class="info">
+    <h2 class="lang lang-zh">系统要求</h2><h2 class="lang lang-en">Requirements</h2>
+    <ul><li>macOS 14.0+</li><li>Apple Silicon (M1/M2/M3/M4)</li><li class="lang lang-zh">需要麦克风</li><li class="lang lang-en">Microphone required</li></ul>
+    <h2 style="margin-top:20px" class="lang lang-zh">安装方法</h2><h2 style="margin-top:20px" class="lang lang-en">How to Install</h2>
+    <ol>
+      <li class="lang lang-zh">下载 DMG 文件</li><li class="lang lang-en">Download the DMG file</li>
+      <li class="lang lang-zh">打开后将 EdgeTalk 拖到应用程序文件夹</li><li class="lang lang-en">Open it and drag EdgeTalk to Applications</li>
+      <li class="lang lang-zh">从应用程序文件夹启动（首次需右键 → 打开）</li><li class="lang lang-en">Launch from Applications (right-click → Open on first launch)</li>
+      <li class="lang lang-zh">根据引导授予麦克风和辅助功能权限</li><li class="lang lang-en">Grant microphone and accessibility permissions when prompted</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>
