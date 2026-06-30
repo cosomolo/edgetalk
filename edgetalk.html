@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>EdgeTalk</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.6; }
+  .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 60px 24px; text-align: center; }
+  .hero h1 { font-size: 40px; font-weight: 700; margin-bottom: 8px; }
+  .hero p { font-size: 16px; opacity: .85; max-width: 500px; margin: 0 auto; }
+  .section { max-width: 640px; margin: 0 auto; padding: 40px 24px; }
+  h2 { font-size: 20px; margin-bottom: 12px; }
+  p { font-size: 14px; color: #555; margin-bottom: 8px; }
+  a { color: #0f3460; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .card h3 { font-size: 16px; margin-bottom: 6px; }
+  .card p { font-size: 13px; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>EdgeTalk</h1>
+  <p>Hold right Cmd, speak, release — your words appear at the cursor. 100% offline.</p>
+</section>
+
+<section class="section">
+  <h2>What EdgeTalk Does</h2>
+  <p>EdgeTalk is a macOS voice typing tool. It runs entirely on your device — no internet, no account, no data collection. Hold right Cmd, speak, release, and the recognized text appears wherever your cursor is: Notes, browser, terminal, Messages, any app.</p>
+  <p>EdgeTalk is built for accessibility: for users who find conventional keyboards difficult to use, voice replaces the keyboard. The Accessibility permission enables this — it does nothing else.</p>
+</section>
+
+<section class="section">
+  <h2>Permissions</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Microphone</h3>
+      <p>Required to capture audio for speech recognition. All processing happens locally. Audio data never leaves the device.</p>
+    </div>
+    <div class="card">
+      <h3>Accessibility</h3>
+      <p>Required to paste recognized text at the active cursor via Cmd+V. Enables voice typing for users with motor impairments or typing difficulties. Never reads or accesses content from other apps.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Key Features</h2>
+  <div class="cards">
+    <div class="card"><h3>100% Offline</h3><p>All speech recognition and correction run locally on your Mac. No cloud, no account, no data collection.</p></div>
+    <div class="card"><h3>Dual AI Models</h3><p>Lightweight zipformer model streams text in real time. Qwen3-ASR 0.6B LLM corrects on release for higher accuracy.</p></div>
+    <div class="card"><h3>Bilingual</h3><p>Supports Chinese and English natively. Switch languages on the fly without changing settings.</p></div>
+    <div class="card"><h3>Lightweight</h3><p>~5–10% CPU, ~160MB memory. Runs quietly in your menu bar.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Requirements</h2>
+  <p>macOS 14.0 or later. Apple Silicon (M1/M2/M3/M4). Microphone required.</p>
+  <p style="margin-top:16px;font-weight:600;">Available on the Mac App Store</p>
+</section>
+
+<section class="section">
+  <h2>Support & Policies</h2>
+  <p><a href="/support">Support & FAQ</a> — troubleshooting and contact information.</p>
+  <p><a href="/privacy">Privacy Policy</a> — we collect no data whatsoever.</p>
+</section>
+
+</body>
+</html>
