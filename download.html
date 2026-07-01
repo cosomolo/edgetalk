@@ -18,6 +18,8 @@
   .info p,.info li { font-size: 14px; color: #555; margin-bottom: 6px; }
   .info ol,.info ul { padding-left: 20px; }
   .trial { margin-top: 24px; font-size: 14px; color: #888; }
+  footer { text-align: center; padding: 40px 24px 60px; font-size: 13px; color: #999; }
+  footer a { color: #666; text-decoration: none; margin: 0 8px; }
 </style>
 <script>
   function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
@@ -39,7 +41,7 @@
   <p class="subtitle lang lang-zh">以声为笔，无需键盘。为所有用户设计——尤其是有打字障碍的用户。</p>
   <p class="subtitle lang lang-en">Voice typing, zero privacy trade-offs. Built for everyone — including those who can't easily type.</p>
 
-  <a class="download-btn" href="https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg">
+  <a class="download-btn" id="dl-btn" href="https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg">
     <span class="lang lang-zh">下载 Mac 版（Apple Silicon）</span>
     <span class="lang lang-en">Download for Mac (Apple Silicon)</span>
   </a>
@@ -47,9 +49,7 @@
   <p class="trial"><span class="lang lang-zh">含 14 天免费试用。</span><span class="lang lang-en">Includes 14-day free trial.</span> <a href="/buy"><span class="lang lang-zh">购买 License →</span><span class="lang lang-en">Buy a license →</span></a></p>
 
   <div class="info">
-    <h2 class="lang lang-zh">系统要求</h2><h2 class="lang lang-en">Requirements</h2>
-    <ul><li>macOS 14.0+</li><li>Apple Silicon (M1/M2/M3/M4)</li><li class="lang lang-zh">需要麦克风</li><li class="lang lang-en">Microphone required</li></ul>
-    <h2 style="margin-top:20px" class="lang lang-zh">安装方法</h2><h2 style="margin-top:20px" class="lang lang-en">How to Install</h2>
+    <h2 class="lang lang-zh">安装方法</h2><h2 class="lang lang-en">How to Install</h2>
     <ol>
       <li class="lang lang-zh">下载 DMG 文件</li><li class="lang lang-en">Download the DMG file</li>
       <li class="lang lang-zh">打开后将 EdgeTalk 拖到应用程序文件夹</li><li class="lang lang-en">Open it and drag EdgeTalk to Applications</li>
@@ -58,5 +58,20 @@
     </ol>
   </div>
 </div>
-</body>
-</html>
+
+<script>
+(function(){
+  var GH = "https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg";
+  var R2 = "https://s3.edgetalk.cc/downloads/EdgeTalk.dmg";
+  var btn = document.getElementById("dl-btn");
+  // Default to GitHub; switch to R2 if browser locale is zh-*
+  if (navigator.language.startsWith("zh")) { btn.href = R2; }
+})();
+</script>
+
+<footer>
+  <div><a href="/privacy"><span class="lang lang-zh">隐私政策</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">技术支持</span><span class="lang lang-en">Support</span></a><a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a></div>
+  <p style="margin-top:8px;">&copy; 2026 EdgeTalk</p>
+</footer>
+
+</body></html>
