@@ -8,126 +8,115 @@
 <title>Activate EdgeTalk</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.6; }
-  .topbar { display: flex; justify-content: flex-end; padding: 12px 20px; gap: 8px; }
-  .lang-btn { font-size: 13px; color: #666; background: none; border: 1px solid #ccc; padding: 2px 10px; border-radius: 4px; cursor: pointer; }
-  .lang-btn.active { color: #333; border-color: #333; font-weight: 600; }
-  .lang { display: none; } .lang.visible { display: block; }
-  .container { max-width: 600px; margin: 0 auto; padding: 40px 24px 60px; }
-  h1 { font-size: 28px; margin-bottom: 8px; }
-  .subtitle { font-size: 15px; color: #666; margin-bottom: 32px; }
-  .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #eee; }
-  .step:last-child { border-bottom: none; }
-  .step-num { width: 28px; height: 28px; background: #0f3460; color: #fff; border-radius: 50%; text-align: center; line-height: 28px; font-size: 14px; font-weight: 600; flex-shrink: 0; }
-  .step-body p { font-size: 14px; color: #555; margin-top: 4px; }
-  .key-example { font-family: monospace; font-size: 18px; letter-spacing: 2px; background: #f0f4ff; padding: 12px 20px; border-radius: 8px; display: inline-block; }
-  .faq { background: #fff; border-radius: 12px; padding: 24px; margin-top: 32px; }
-  .faq h2 { font-size: 18px; margin-bottom: 12px; }
-  .faq p { font-size: 14px; color: #555; margin-top: 8px; }
-  .faq strong { color: #333; }
-  .cta { text-align: center; margin-top: 32px; }
-  .cta a { display: inline-block; padding: 12px 32px; font-size: 16px; font-weight: 600; color: #fff; background: #0f3460; border-radius: 10px; text-decoration: none; }
-  .cta a:hover { background: #1a4a80; }
-  footer { text-align: center; padding: 40px 24px 60px; font-size: 13px; color: #999; }
-  footer a { color: #666; text-decoration: none; margin: 0 8px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f8f9fa; color: #1d1d1f; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .topbar { display:flex; justify-content:flex-end; align-items:center; padding:14px 24px; gap:6px; background:#0a0e1a; }
+  .topbar a { font-size:13px; color:rgba(255,255,255,.6); text-decoration:none; margin:0 6px; }
+  .topbar a:hover { color:#fff; }
+  .lang-btn { font-size:12px; color:rgba(255,255,255,.5); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); padding:3px 10px; border-radius:6px; cursor:pointer; }
+  .lang-btn.active { color:#fff; border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.15); }
+  .lang { display:none; } .lang.visible { display:block; }
+  .page-header { background:linear-gradient(135deg,#0a0e1a,#162544); color:#fff; padding:80px 24px 60px; text-align:center; }
+  .page-header h1 { font-size:36px; font-weight:700; margin-bottom:8px; }
+  .page-header p { font-size:16px; opacity:.7; }
+  .container { max-width:600px; margin:0 auto; padding:40px 24px 80px; }
+  .card { background:#fff; border-radius:14px; padding:28px; border:1px solid #eee; margin-bottom:20px; }
+  .card h2 { font-size:18px; margin-bottom:16px; }
+  .step { display:flex; gap:16px; padding:14px 0; border-bottom:1px solid #f0f0f0; }
+  .step:last-child { border-bottom:none; }
+  .step-num { width:28px; height:28px; background:#0f3460; color:#fff; border-radius:50%; text-align:center; line-height:28px; font-size:13px; font-weight:600; flex-shrink:0; }
+  .step-body p { font-size:14px; color:#555; margin-top:2px; }
+  .key-example { font-family:monospace; font-size:18px; letter-spacing:2px; background:#f0f4ff; padding:12px 20px; border-radius:8px; display:inline-block; margin-top:8px; }
+  .faq p { font-size:14px; color:#555; margin-top:8px; }
+  .faq strong { color:#333; }
+  .cta { text-align:center; margin-top:24px; }
+  .cta a { display:inline-block; padding:12px 32px; font-size:16px; font-weight:600; color:#fff; background:#0f3460; border-radius:10px; text-decoration:none; }
+  .cta a:hover { background:#1a4a80; }
+  footer { text-align:center; padding:40px 24px 60px; border-top:1px solid #eee; }
+  footer a { color:#666; text-decoration:none; margin:0 10px; font-size:14px; }
+  footer a:hover { color:#333; }
+  footer p { margin-top:12px; font-size:13px; color:#999; }
 </style>
 <script>
   function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
   var L = localStorage.getItem('lang') || detectLang();
-  function switchLang(l) { L = l; document.querySelectorAll('.lang').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el => el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l)); localStorage.setItem('lang', l); }
-  document.addEventListener('DOMContentLoaded', () => { switchLang(L); });
+  function switchLang(l) { L=l; localStorage.setItem('lang',l); document.querySelectorAll('.lang').forEach(el=>el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el=>el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l)); }
+  document.addEventListener('DOMContentLoaded',()=>{ switchLang(L); });
 </script>
 </head>
 <body>
 
 <div class="topbar">
-  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
-  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">English</button>
+  <a href="/"><span class="lang lang-zh visible">首页</span><span class="lang lang-en">Home</span></a>
+  <a href="/download"><span class="lang lang-zh">下载</span><span class="lang lang-en">Download</span></a>
+  <a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a>
+  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中</button>
+  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+</div>
+
+<div class="page-header">
+  <h1><span class="lang lang-zh visible">激活 EdgeTalk</span><span class="lang lang-en">Activate EdgeTalk</span></h1>
+  <p><span class="lang lang-zh visible">输入 License Key 解锁全部功能</span><span class="lang lang-en">Enter your license key to unlock all features</span></p>
 </div>
 
 <div class="container">
-  <h1 class="lang lang-zh">激活 EdgeTalk</h1>
-  <h1 class="lang lang-en">Activate EdgeTalk</h1>
-  <p class="subtitle lang lang-zh">输入 License Key 解锁全部功能</p>
-  <p class="subtitle lang lang-en">Enter your license key to unlock all features</p>
-
-  <div style="background:#fff; border-radius:12px; padding:24px;">
+  <div class="card">
+    <h2><span class="lang lang-zh visible">激活步骤</span><span class="lang lang-en">Steps</span></h2>
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <strong class="lang lang-zh">购买 License Key</strong><strong class="lang lang-en">Purchase a License Key</strong>
-        <p class="lang lang-zh">还没有 Key？<a href="/buy">前往购买</a></p>
-        <p class="lang lang-en">Don't have one yet? <a href="/buy">Buy a license</a></p>
+        <strong><span class="lang lang-zh visible">购买 License Key</span><span class="lang lang-en">Purchase a License Key</span></strong>
+        <p><span class="lang lang-zh visible">还没有 Key？<a href="/buy">前往购买</a></span><span class="lang lang-en">Don't have one? <a href="/buy">Buy a license</a></span></p>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <strong class="lang lang-zh">打开 EdgeTalk</strong><strong class="lang lang-en">Launch EdgeTalk</strong>
-        <p class="lang lang-zh">首次启动自动弹出激活窗口。如已关闭，重启应用即可。</p>
-        <p class="lang lang-en">The activation window appears on first launch. Restart the app if you closed it.</p>
+        <strong><span class="lang lang-zh visible">打开 EdgeTalk</span><span class="lang lang-en">Launch EdgeTalk</span></strong>
+        <p><span class="lang lang-zh visible">首次启动会自动弹出激活窗口。</span><span class="lang lang-en">The activation window appears on first launch.</span></p>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <strong class="lang lang-zh">输入 License Key</strong><strong class="lang lang-en">Enter Your License Key</strong>
-        <p class="lang lang-zh">在激活窗口中输入您的 Key（自动格式化）：</p>
-        <p class="lang lang-en">Type or paste your key (auto-formatted):</p>
-        <div style="margin-top:12px;">
-          <span class="key-example">ET-8K2M-P7QN-J5VL</span>
-        </div>
+        <strong><span class="lang lang-zh visible">输入 License Key</span><span class="lang lang-en">Enter Your License Key</span></strong>
+        <p><span class="lang lang-zh visible">在激活窗口中输入（自动格式化）：</span><span class="lang lang-en">Type or paste your key (auto-formatted):</span></p>
+        <div><span class="key-example">ET-8K2M-P7QN-J5VL</span></div>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <strong class="lang lang-zh">点击激活</strong><strong class="lang lang-en">Click Activate</strong>
-        <p class="lang lang-zh">联网自动验证并绑定设备。网络不可用时使用离线验证。</p>
-        <p class="lang lang-en">Online verification runs automatically. Falls back to offline validation.</p>
+        <strong><span class="lang lang-zh visible">点击激活</span><span class="lang lang-en">Click Activate</span></strong>
+        <p><span class="lang lang-zh visible">联网验证并绑定设备。网络不可用时自动使用离线验证。</span><span class="lang lang-en">Online verification with offline fallback.</span></p>
       </div>
     </div>
-
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <strong class="lang lang-zh">开始使用</strong><strong class="lang lang-en">Start Using</strong>
-        <p class="lang lang-zh">按住右 ⌘ 说话，松开即输入。完全离线运行。</p>
-        <p class="lang lang-en">Hold right ⌘, speak, release to type. 100% offline.</p>
+        <strong><span class="lang lang-zh visible">开始使用</span><span class="lang lang-en">Start Using</span></strong>
+        <p><span class="lang lang-zh visible">按住右 ⌘ 说话，松开即输入。完全离线运行。</span><span class="lang lang-en">Hold right ⌘, speak, release to type. 100% offline.</span></p>
       </div>
     </div>
   </div>
 
-  <div class="faq">
-    <h2 class="lang lang-zh">常见问题</h2><h2 class="lang lang-en">FAQ</h2>
-    <p><strong class="lang lang-zh">一个 Key 能用几台电脑？</strong><strong class="lang lang-en">How many devices per license?</strong></p>
-    <p class="lang lang-zh">个人版最多绑定 3 台设备。</p>
-    <p class="lang lang-en">Up to 3 devices per personal license.</p>
-
-    <p style="margin-top:16px;"><strong class="lang lang-zh">重装系统后 Key 还能用吗？</strong><strong class="lang lang-en">Reinstall macOS?</strong></p>
-    <p class="lang lang-zh">可以。重装后同一台电脑上再次输入 Key 即可。</p>
-    <p class="lang lang-en">Just enter the same key on the same machine after reinstall.</p>
-
-    <p style="margin-top:16px;"><strong class="lang lang-zh">Key 丢了怎么办？</strong><strong class="lang lang-en">Lost your key?</strong></p>
-    <p class="lang lang-zh">查看购买时的邮件。找不到请联系 fengxiq@gmail.com。</p>
-    <p class="lang lang-en">Check your purchase email. Contact fengxiq@gmail.com if needed.</p>
-
-    <p style="margin-top:16px;"><strong class="lang lang-zh">从 App Store 下载的需要激活吗？</strong><strong class="lang lang-en">App Store version?</strong></p>
-    <p class="lang lang-zh">不需要。App Store 版本使用系统购买验证，无需手动激活。</p>
-    <p class="lang lang-en">No — App Store purchases are validated automatically.</p>
+  <div class="card faq">
+    <h2><span class="lang lang-zh visible">常见问题</span><span class="lang lang-en">FAQ</span></h2>
+    <p><strong><span class="lang lang-zh visible">一个 Key 能用几台电脑？</span><span class="lang lang-en">How many devices?</span></strong></p>
+    <p><span class="lang lang-zh visible">个人版最多绑定 3 台设备。</span><span class="lang lang-en">Up to 3 devices per personal license.</span></p>
+    <p style="margin-top:12px;"><strong><span class="lang lang-zh visible">重装系统后 Key 还能用吗？</span><span class="lang lang-en">Reinstall macOS?</span></strong></p>
+    <p><span class="lang lang-zh visible">同一台电脑上再次输入 Key 即可。</span><span class="lang lang-en">Enter the same key on the same machine — it will work.</span></p>
+    <p style="margin-top:12px;"><strong><span class="lang lang-zh visible">Key 丢了怎么办？</span><span class="lang lang-en">Lost your key?</span></strong></p>
+    <p><span class="lang lang-zh visible">查看购买时的邮件。找不到联系 fengxiq@gmail.com。</span><span class="lang lang-en">Check purchase email. Contact fengxiq@gmail.com.</span></p>
   </div>
 
   <div class="cta">
-    <a href="/buy"><span class="lang lang-zh">还没有 Key？前往购买</span><span class="lang lang-en">Don't have a key? Buy one</span></a>
+    <a href="/buy"><span class="lang lang-zh visible">还没有 Key？前往购买</span><span class="lang lang-en">Don't have a key? Buy one</span></a>
   </div>
 </div>
 
 <footer>
-  <div><a href="/download"><span class="lang lang-zh">下载</span><span class="lang lang-en">Download</span></a><a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a><a href="/privacy"><span class="lang lang-zh">隐私政策</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">技术支持</span><span class="lang lang-en">Support</span></a></div>
-  <p style="margin-top:8px;">&copy; 2026 EdgeTalk</p>
+  <div><a href="/"><span class="lang lang-zh visible">首页</span><span class="lang lang-en">Home</span></a><a href="/download"><span class="lang lang-zh">下载</span><span class="lang lang-en">Download</span></a><a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a><a href="/privacy"><span class="lang lang-zh">隐私</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">支持</span><span class="lang lang-en">Support</span></a></div>
+  <p>&copy; 2026 EdgeTalk</p>
 </footer>
 
 </body></html>

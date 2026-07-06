@@ -8,113 +8,91 @@
 <title>Download EdgeTalk</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f5f5f5; color: #1d1d1f; line-height: 1.6; }
-  .topbar { display: flex; justify-content: flex-end; padding: 12px 20px; gap: 8px; }
-  .lang-btn { font-size: 13px; color: #666; background: none; border: 1px solid #ccc; padding: 2px 10px; border-radius: 4px; cursor: pointer; }
-  .lang-btn.active { color: #333; border-color: #333; font-weight: 600; }
-  .lang { display: none; } .lang.visible { display: block; }
-  .container { max-width: 600px; margin: 0 auto; padding: 40px 24px 60px; text-align: center; }
-  h1 { font-size: 28px; margin-bottom: 8px; }
-  .subtitle { font-size: 15px; color: #666; margin-bottom: 32px; }
-  .download-btn { display: inline-block; padding: 16px 48px; font-size: 18px; font-weight: 600; color: #fff; background: #0f3460; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; }
-  .download-btn:hover { background: #1a4a80; }
-  .info { background: #fff; border-radius: 12px; padding: 24px; margin-top: 32px; text-align: left; }
-  .info h2 { font-size: 18px; margin-bottom: 12px; }
-  .info p,.info li { font-size: 14px; color: #555; margin-bottom: 6px; }
-  .info ol,.info ul { padding-left: 20px; }
-  .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-  .detail-row:last-child { border-bottom: none; }
-  .detail-label { color: #888; }
-  .detail-value { color: #333; font-family: monospace; }
-  .trial { margin-top: 24px; font-size: 14px; color: #888; }
-  .store-section { margin-top: 24px; }
-  footer { text-align: center; padding: 40px 24px 60px; font-size: 13px; color: #999; }
-  footer a { color: #666; text-decoration: none; margin: 0 8px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif; background: #f8f9fa; color: #1d1d1f; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .topbar { display:flex; justify-content:flex-end; align-items:center; padding:14px 24px; gap:6px; background:#0a0e1a; }
+  .topbar a { font-size:13px; color:rgba(255,255,255,.6); text-decoration:none; margin:0 6px; }
+  .topbar a:hover { color:#fff; }
+  .lang-btn { font-size:12px; color:rgba(255,255,255,.5); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); padding:3px 10px; border-radius:6px; cursor:pointer; }
+  .lang-btn.active { color:#fff; border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.15); }
+  .lang { display:none; } .lang.visible { display:block; }
+  .page-header { background:linear-gradient(135deg,#0a0e1a,#162544); color:#fff; padding:80px 24px 60px; text-align:center; }
+  .page-header h1 { font-size:36px; font-weight:700; margin-bottom:8px; }
+  .page-header p { font-size:16px; opacity:.7; }
+  .container { max-width:600px; margin:0 auto; padding:40px 24px 80px; text-align:center; }
+  .download-btn { display:inline-block; padding:16px 48px; font-size:18px; font-weight:600; color:#fff; background:#0f3460; border:0; border-radius:12px; cursor:pointer; text-decoration:none; transition:all.15s; }
+  .download-btn:hover { background:#1a4a80; transform:translateY(-1px); }
+  .trial { margin-top:20px; font-size:14px; color:#888; }
+  .trial a { color:#0f3460; }
+  .card { background:#fff; border-radius:14px; padding:24px; margin-top:24px; text-align:left; border:1px solid #eee; }
+  .card h2 { font-size:18px; margin-bottom:12px; }
+  .card p,.card li { font-size:14px; color:#555; margin-bottom:6px; }
+  .card ol { padding-left:20px; }
+  .detail-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:14px; }
+  .detail-row:last-child { border-bottom:none; }
+  .detail-label { color:#888; }
+  .detail-value { color:#333; font-family:monospace; font-size:12px; }
+  footer { text-align:center; padding:40px 24px 60px; border-top:1px solid #eee; }
+  footer a { color:#666; text-decoration:none; margin:0 10px; font-size:14px; }
+  footer a:hover { color:#333; }
+  footer p { margin-top:12px; font-size:13px; color:#999; }
 </style>
 <script>
   function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
   var L = localStorage.getItem('lang') || detectLang();
-  function switchLang(l) { L = l; document.querySelectorAll('.lang').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el => el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l)); localStorage.setItem('lang', l); }
-  document.addEventListener('DOMContentLoaded', () => { switchLang(L); });
+  function switchLang(l) { L=l; localStorage.setItem('lang',l); document.querySelectorAll('.lang').forEach(el=>el.classList.remove('visible')); document.querySelectorAll('.lang-'+l).forEach(el=>el.classList.add('visible')); document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l)); }
+  document.addEventListener('DOMContentLoaded',()=>{ switchLang(L); });
 </script>
 </head>
 <body>
 
 <div class="topbar">
-  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中文</button>
-  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">English</button>
+  <a href="/"><span class="lang lang-zh visible">首页</span><span class="lang lang-en">Home</span></a>
+  <a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a>
+  <a href="/activate"><span class="lang lang-zh">激活</span><span class="lang lang-en">Activate</span></a>
+  <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">中</button>
+  <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+</div>
+
+<div class="page-header">
+  <h1><span class="lang lang-zh visible">下载 EdgeTalk</span><span class="lang lang-en">Download EdgeTalk</span></h1>
+  <p><span class="lang lang-zh visible">离线语音输入，完全本地运行</span><span class="lang lang-en">Offline voice typing, 100% on your device</span></p>
 </div>
 
 <div class="container">
-  <h1 class="lang lang-zh">EdgeTalk for macOS</h1>
-  <h1 class="lang lang-en">EdgeTalk for macOS</h1>
-  <p class="subtitle lang lang-zh">以声为笔，无需键盘。为所有用户设计——尤其是有打字障碍的用户。</p>
-  <p class="subtitle lang lang-en">Voice typing, zero privacy trade-offs. Built for everyone — including those who can't easily type.</p>
-
   <a class="download-btn" id="dl-btn" href="https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg">
-    <span class="lang lang-zh">下载 Mac 版（Apple Silicon）</span>
-    <span class="lang lang-en">Download for Mac (Apple Silicon)</span>
+    <span class="lang lang-zh visible">下载 Mac 版（Apple Silicon）</span><span class="lang lang-en">Download for Mac (Apple Silicon)</span>
   </a>
-
   <p class="trial">
-    <span class="lang lang-zh">含 14 天免费试用。</span><span class="lang lang-en">Includes 14-day free trial.</span>
+    <span class="lang lang-zh visible">含 14 天免费试用。</span><span class="lang lang-en">Includes 14-day free trial.</span>
     <a href="/buy"><span class="lang lang-zh">购买 License →</span><span class="lang lang-en">Buy a license →</span></a>
   </p>
 
-  <div class="info">
-    <h2 class="lang lang-zh">版本信息</h2><h2 class="lang lang-en">Details</h2>
-    <div>
-      <div class="detail-row">
-        <span class="detail-label"><span class="lang lang-zh">版本</span><span class="lang lang-en">Version</span></span>
-        <span class="detail-value">1.0</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label"><span class="lang lang-zh">系统要求</span><span class="lang lang-en">System</span></span>
-        <span class="detail-value">macOS 14.0+ &middot; Apple Silicon</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label"><span class="lang lang-zh">大小</span><span class="lang lang-en">Size</span></span>
-        <span class="detail-value">~150 MB (不含模型)</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">SHA256</span>
-        <span class="detail-value" style="font-size:11px;">(构建后更新)</span>
-      </div>
-    </div>
+  <div class="card">
+    <h2><span class="lang lang-zh visible">版本信息</span><span class="lang lang-en">Details</span></h2>
+    <div class="detail-row"><span class="detail-label"><span class="lang lang-zh visible">版本</span><span class="lang lang-en">Version</span></span><span class="detail-value">1.0</span></div>
+    <div class="detail-row"><span class="detail-label"><span class="lang lang-zh visible">系统要求</span><span class="lang lang-en">System</span></span><span class="detail-value">macOS 14.0+ · Apple Silicon</span></div>
+    <div class="detail-row"><span class="detail-label"><span class="lang lang-zh visible">大小</span><span class="lang lang-en">Size</span></span><span class="detail-value">~150 MB (不含模型)</span></div>
+    <div class="detail-row"><span class="detail-label">SHA256</span><span class="detail-value" style="font-size:11px;">(构建后更新)</span></div>
   </div>
 
-  <div class="info">
-    <h2 class="lang lang-zh">安装方法</h2><h2 class="lang lang-en">How to Install</h2>
+  <div class="card">
+    <h2><span class="lang lang-zh visible">安装方法</span><span class="lang lang-en">Installation</span></h2>
     <ol>
-      <li class="lang lang-zh">下载 DMG 文件</li><li class="lang lang-en">Download the DMG file</li>
-      <li class="lang lang-zh">打开后将 EdgeTalk 拖到应用程序文件夹</li><li class="lang lang-en">Open it and drag EdgeTalk to Applications</li>
-      <li class="lang lang-zh">从应用程序文件夹启动（首次需右键 → 打开）</li><li class="lang lang-en">Launch from Applications (right-click → Open on first launch)</li>
-      <li class="lang lang-zh">根据引导授予麦克风和辅助功能权限</li><li class="lang lang-en">Grant microphone and accessibility permissions when prompted</li>
+      <li><span class="lang lang-zh visible">下载 .dmg 文件</span><span class="lang lang-en">Download the .dmg file</span></li>
+      <li><span class="lang lang-zh visible">打开后将 EdgeTalk 拖到应用程序文件夹</span><span class="lang lang-en">Open and drag to Applications</span></li>
+      <li><span class="lang lang-zh visible">首次启动需右键 → 打开</span><span class="lang lang-en">Right-click → Open on first launch</span></li>
+      <li><span class="lang lang-zh visible">授予麦克风和辅助功能权限</span><span class="lang lang-en">Grant mic &amp; accessibility permissions</span></li>
     </ol>
-  </div>
-
-  <div class="info store-section">
-    <h2 class="lang lang-zh">Mac App Store</h2><h2 class="lang lang-en">Mac App Store</h2>
-    <p class="lang lang-zh">无需激活，安装后即可使用。</p>
-    <p class="lang lang-en">No activation needed — download and use immediately.</p>
-    <a href="https://apps.apple.com/app/edgetalk/id6744461491" style="display:inline-block; margin-top:8px;">
-      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/zh-cn?size=250x83" alt="Mac App Store" style="height:36px;">
-    </a>
   </div>
 </div>
 
 <script>
-(function(){
-  var GH = "https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg";
-  var CF = "https://edgetalk.cc/api/download";
-  var btn = document.getElementById("dl-btn");
-  if (navigator.language.startsWith("zh")) { btn.href = CF; }
-})();
+(function(){ var GH="https://github.com/cosomolo/privateType/releases/latest/download/EdgeTalk.dmg"; var CF="https://edgetalk.cc/api/download"; var btn=document.getElementById("dl-btn"); if(navigator.language.startsWith("zh")) btn.href=CF; })();
 </script>
 
 <footer>
-  <div><a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a><a href="/activate"><span class="lang lang-zh">激活</span><span class="lang lang-en">Activate</span></a><a href="/privacy"><span class="lang lang-zh">隐私政策</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">技术支持</span><span class="lang lang-en">Support</span></a></div>
-  <p style="margin-top:8px;">&copy; 2026 EdgeTalk</p>
+  <div><a href="/"><span class="lang lang-zh visible">首页</span><span class="lang lang-en">Home</span></a><a href="/buy"><span class="lang lang-zh">购买</span><span class="lang lang-en">Buy</span></a><a href="/activate"><span class="lang lang-zh">激活</span><span class="lang lang-en">Activate</span></a><a href="/privacy"><span class="lang lang-zh">隐私</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">支持</span><span class="lang lang-en">Support</span></a></div>
+  <p>&copy; 2026 EdgeTalk</p>
 </footer>
 
 </body></html>
