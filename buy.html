@@ -30,6 +30,13 @@
   #result .key { font-size: 28px; font-family: monospace; font-weight: 700; background: #f0f4ff; padding: 12px 20px; border-radius: 8px; letter-spacing: 2px; display: inline-block; margin: 12px 0; }
   .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid #e5e5e5; border-top-color: #0f3460; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; margin-right: 8px; }
   @keyframes spin { to { transform: rotate(360deg); } }
+  .faq { background: #fff; border-radius: 12px; padding: 24px; margin-top: 20px; }
+  .faq h2 { font-size: 18px; margin-bottom: 12px; }
+  .faq p { font-size: 14px; color: #555; margin-top: 8px; }
+  .faq strong { color: #333; }
+  .unavailable { display: none; text-align: center; padding: 40px 20px; }
+  .unavailable a { color: #0f3460; text-decoration: underline; }
+  .appstore-badge img { height: 36px; margin-top: 12px; }
 </style>
 <script>
   function detectLang() { return navigator.language.startsWith('zh') ? 'zh' : 'en'; }
@@ -48,7 +55,7 @@
 <div class="container">
   <h1>EdgeTalk License</h1>
   <p class="subtitle lang lang-zh">一次买断，终身使用。可在最多 3 台 Mac 上激活。14 天免费试用。</p>
-  <p class="subtitle lang lang-en">One-time purchase. Lifetime updates. Use on up to 3 Macs.</p>
+  <p class="subtitle lang lang-en">One-time purchase. Lifetime updates. Use on up to 3 Macs. 14-day free trial included.</p>
 
   <div class="plan">
     <h2 class="lang lang-zh">个人版</h2><h2 class="lang lang-en">Personal License</h2>
@@ -57,36 +64,114 @@
     <ul class="features lang lang-en"><li>All features unlocked</li><li>Use on up to 3 Macs</li><li>1.7B Enhanced model support</li><li>Free updates</li><li>14-day free trial included</li></ul>
   </div>
 
-  <div class="email-field">
-    <label class="lang lang-zh" for="email">邮箱地址（接收 License Key）</label>
-    <label class="lang lang-en" for="email">Email (receives your license key)</label>
-    <input type="email" id="email" placeholder="you@example.com" required>
+  <div id="buy-section">
+    <div class="email-field">
+      <label class="lang lang-zh" for="email">邮箱地址（接收 License Key）</label>
+      <label class="lang lang-en" for="email">Email (receives your license key)</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </div>
+
+    <button class="buy-btn" id="paybtn" onclick="startPayment()">
+      <span class="lang lang-zh">购买 &mdash; &yen;39</span>
+      <span class="lang lang-en">Buy Now &mdash; $9.99</span>
+    </button>
+
+    <div id="qrcode"></div>
+    <div id="result">
+      <p class="lang lang-zh" style="color:#333;">你的 License Key：</p>
+      <p class="lang lang-en" style="color:#333;">Your License Key:</p>
+      <div class="key" id="license-key"></div>
+      <p class="lang lang-zh" style="color:#666; font-size:13px; margin-top:8px;">已复制到剪贴板。在 App 中输入即可激活。</p>
+      <p class="lang lang-en" style="color:#666; font-size:13px; margin-top:8px;">Copied to clipboard. Enter it in the app to activate.</p>
+    </div>
+    <div id="error" class="error"></div>
   </div>
 
-  <button class="buy-btn lang lang-zh" id="paybtn" onclick="startPayment()">购买 — &yen;39</button>
-  <button class="buy-btn lang lang-en" id="paybtn-en" onclick="startPayment()">Buy Now — $9.99</button>
+  <div id="unavailable" class="unavailable">
+    <p class="lang lang-zh" style="font-size:15px; color:#888;">支付通道正在配置中，敬请期待</p>
+    <p class="lang lang-en" style="font-size:15px; color:#888;">Payment is being set up. Check back soon!</p>
+    <p class="lang lang-zh" style="margin-top:12px;">您也可以从 Mac App Store 下载</p>
+    <p class="lang lang-en" style="margin-top:12px;">You can also get EdgeTalk from the App Store</p>
+    <a href="https://apps.apple.com/app/edgetalk/id6744461491" class="appstore-badge">
+      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/zh-cn?size=250x83" alt="Mac App Store">
+    </a>
+  </div>
 
-  <div id="qrcode"></div>
-  <div id="result"><p class="lang lang-zh" style="color:#333">你的 License Key：</p><p class="lang lang-en" style="color:#333">Your License Key:</p><div class="key" id="license-key"></div><p class="lang lang-zh" style="color:#666; font-size:13px; margin-top:8px;">已复制到剪贴板。在 App 中输入即可激活。</p><p class="lang lang-en" style="color:#666; font-size:13px; margin-top:8px;">Copied to clipboard. Enter it in the app to activate.</p></div>
-  <div id="error" class="error"></div>
+  <div class="faq">
+    <h2 class="lang lang-zh">常见问题</h2><h2 class="lang lang-en">FAQ</h2>
+
+    <p><strong class="lang lang-zh">购买后如何激活？</strong><strong class="lang lang-en">How to activate?</strong></p>
+    <p class="lang lang-zh">License Key 会发送到您的邮箱。打开 EdgeTalk，在激活窗口中输入即可。</p>
+    <p class="lang lang-en">Your key will be emailed. Launch EdgeTalk and enter it in the activation window.</p>
+
+    <p style="margin-top:12px;"><strong class="lang lang-zh">支持退款吗？</strong><strong class="lang lang-en">Refund policy?</strong></p>
+    <p class="lang lang-zh">购买后 14 天内可全额退款。联系 fengxiq@gmail.com。</p>
+    <p class="lang lang-en">Full refund within 14 days. Email fengxiq@gmail.com.</p>
+
+    <p style="margin-top:12px;"><strong class="lang lang-zh">从 App Store 买的需要再买吗？</strong><strong class="lang lang-en">Already on App Store?</strong></p>
+    <p class="lang lang-zh">不需要。App Store 版本包含所有功能，无需额外购买。</p>
+    <p class="lang lang-en">No additional purchase needed — App Store version includes everything.</p>
+  </div>
 </div>
 
 <script>
 const API = "https://edgetalk.cc/api";
 async function startPayment() {
   const email = document.getElementById("email").value.trim();
-  if (!email) { document.getElementById("error").textContent = L==='zh' ? "请输入邮箱地址" : "Please enter your email address."; return; }
-  const btn = document.querySelector(".buy-btn.visible") || document.getElementById("paybtn");
+  if (!email) {
+    document.getElementById("error").textContent = L==='zh' ? "请输入邮箱地址" : "Please enter your email address.";
+    return;
+  }
+  const btn = document.getElementById("paybtn");
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + (L==='zh' ? '处理中…' : 'Processing...');
   document.getElementById("error").textContent = "";
   try {
     const resp = await fetch(API+"/create-order", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email}) });
+    if (resp.status >= 500) {
+      showUnavailable();
+      return;
+    }
     const data = await resp.json();
-    if (data.provider === "payjs") { btn.style.display = "none"; document.getElementById("qrcode").innerHTML = '<img src="'+data.qrcode+'" alt="">'; pollPayment(data.orderId); }
-    else if (data.provider === "lemonsqueezy") { window.location.href = data.url; }
-  } catch(e) { document.getElementById("error").textContent = L==='zh' ? "支付请求失败，请重试。" : "Payment failed. Please try again."; btn.disabled = false; btn.textContent = L==='zh' ? "购买 — ¥39" : "Buy Now — $9.99"; }
+    if (data.provider === "payjs" && data.qrcode) {
+      btn.style.display = "none";
+      document.getElementById("qrcode").innerHTML = '<img src="'+data.qrcode+'" alt="">';
+      pollPayment(data.orderId);
+    } else if (data.provider === "lemonsqueezy" && data.url) {
+      window.location.href = data.url;
+    } else {
+      showUnavailable();
+    }
+  } catch(e) {
+    showUnavailable();
+  }
 }
-async function pollPayment(oid) { for (let i=0;i<60;i++) { await new Promise(r=>setTimeout(r,3000)); try { const r=await fetch(API+"/order-status?order="+oid); const d=await r.json(); if (d.status==="paid" && d.license_key) { document.getElementById("result").style.display="block"; document.getElementById("license-key").textContent=d.license_key; navigator.clipboard.writeText(d.license_key); return; } } catch(e){} } document.getElementById("error").textContent = L==='zh' ? "支付确认超时，请检查邮箱。" : "Timed out. Check your email for the license key."; }
+
+function showUnavailable() {
+  document.getElementById("buy-section").style.display = "none";
+  document.getElementById("unavailable").style.display = "block";
+}
+
+async function pollPayment(oid) {
+  for (let i=0;i<60;i++) {
+    await new Promise(r=>setTimeout(r,3000));
+    try {
+      const r=await fetch(API+"/order-status?order="+oid);
+      const d=await r.json();
+      if (d.status==="paid" && d.license_key) {
+        document.getElementById("result").style.display="block";
+        document.getElementById("license-key").textContent=d.license_key;
+        navigator.clipboard.writeText(d.license_key);
+        return;
+      }
+    } catch(e){}
+  }
+  document.getElementById("error").textContent = L==='zh' ? "支付确认超时，请检查邮箱。" : "Timed out. Check your email for the license key.";
+}
 </script>
-</body>
-</html>
+
+<footer>
+  <div><a href="/download"><span class="lang lang-zh">下载</span><span class="lang lang-en">Download</span></a><a href="/activate"><span class="lang lang-zh">激活</span><span class="lang lang-en">Activate</span></a><a href="/privacy"><span class="lang lang-zh">隐私政策</span><span class="lang lang-en">Privacy</span></a><a href="/support"><span class="lang lang-zh">技术支持</span><span class="lang lang-en">Support</span></a></div>
+  <p style="margin-top:8px;">&copy; 2026 EdgeTalk</p>
+</footer>
+
+</body></html>
